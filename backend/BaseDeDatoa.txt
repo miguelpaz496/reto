@@ -1,0 +1,28 @@
+CREATE TABLE tbldomain(
+domain_id SERIAL PRIMARY KEY,
+domain VARCHAR NOT NULL,
+server_changed BOOL,
+ssl_grade VARCHAR,
+previous_ssl_grade VARCHAR,
+logo VARCHAR,
+title VARCHAR,
+is_down BOOL
+);
+
+
+CREATE TABLE tblserver(
+server_id SERIAL PRIMARY KEY,
+dominio INT NOT NULL,
+address VARCHAR,
+ssl_grade VARCHAR,
+country VARCHAR,
+owner VARCHAR,
+constraint fk_tblserver_tbldomain
+    foreign key (dominio) 
+    REFERENCES tbldomain (domain_id)
+);
+
+	
+INSERT INTO tbldomain(domain) 
+VALUES('valor')
+RETURNING domain_id;
